@@ -15,4 +15,22 @@ public class CustomerServiceImpl implements CustomerService {
                 .name("Mike")
                 .build();
     }
+
+    @Override
+    public CustomerDto save(CustomerDto customerToSave) {
+//        TODO not implemented yet
+        return null;
+    }
+
+    @Override
+    public CustomerDto update(UUID customerId, CustomerDto customerNewValues) {
+//        TODO not implemented yet
+        return null;
+    }
+
+    @Override
+    public boolean delete(UUID customerId) {
+//        TODO not implemented yet
+        return false;
+    }
 }

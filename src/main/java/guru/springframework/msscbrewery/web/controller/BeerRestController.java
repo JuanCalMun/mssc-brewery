@@ -26,7 +26,7 @@ public class BeerRestController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpHeaders> saveBeer(@RequestBody BeerDto beerToSave) {
+    public ResponseEntity saveBeer(@RequestBody BeerDto beerToSave) {
         BeerDto savedBeer = beerService.save(beerToSave);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create("/api/v1/beer/" + savedBeer.getId().toString()));
@@ -34,8 +34,15 @@ public class BeerRestController {
     }
 
     @PutMapping("/{beerId}")
-    public ResponseEntity<BeerDto> updateBeer(@PathVariable UUID beerId, @RequestBody BeerDto beerNewValues) {
-        BeerDto updatedBeer = beerService.updateBeer(beerId, beerNewValues);
-        return new ResponseEntity<>(updatedBeer, HttpStatus.OK);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateBeer(@PathVariable UUID beerId,
+                           @RequestBody BeerDto beerNewValues) {
+        beerService.update(beerId, beerNewValues);
+    }
+
+    @DeleteMapping("/{beerId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBeer(@PathVariable UUID beerId) {
+        beerService.delete(beerId);
     }
 }
