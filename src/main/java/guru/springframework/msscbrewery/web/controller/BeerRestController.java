@@ -22,7 +22,7 @@ public class BeerRestController {
 
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeer(@PathVariable UUID beerId) {
-        return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
+        return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.ACCEPTED);
     }
 
     @PostMapping
@@ -40,9 +40,9 @@ public class BeerRestController {
         beerService.update(beerId, beerNewValues);
     }
 
-    @DeleteMapping("/{beerId}")
+    @DeleteMapping("/{customerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteBeer(@PathVariable UUID beerId) {
-        beerService.delete(beerId);
+    public void deleteBeer(@PathVariable UUID customerId) {
+        beerService.delete(customerId);
     }
 }
