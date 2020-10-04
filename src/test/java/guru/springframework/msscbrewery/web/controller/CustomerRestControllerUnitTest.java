@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.UUID;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -93,7 +94,7 @@ public class CustomerRestControllerUnitTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(customerDtoJson))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string("[\"customerDto: name -> must not be blank\",\"customerDto: name -> size must be between 3 and 100\"]"));
+                .andExpect(jsonPath("$", hasSize(2)));
     }
 
 }

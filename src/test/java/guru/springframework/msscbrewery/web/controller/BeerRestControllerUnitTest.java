@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.UUID;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -95,7 +96,7 @@ public class BeerRestControllerUnitTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(beerDtoJson))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string("[\"beerDto: id -> must be null\",\"beerDto: beerName -> must not be blank\"]"));
+                .andExpect(jsonPath("$", hasSize(2)));
     }
 
 }
