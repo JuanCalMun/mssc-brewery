@@ -50,7 +50,7 @@ public class BeerRestController {
         beerService.delete(beerId);
     }
 
-    @ExceptionHandler({MethodArgumentNotValidException.class})
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<String>> validationHandler(MethodArgumentNotValidException exception) {
         List<String> errorList = exception.getBindingResult().getFieldErrors()
                 .stream()
