@@ -93,7 +93,7 @@ public class CustomerRestControllerUnitTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(customerDtoJson))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string("[\"customerDto: name -> must be greater than or equal to 3\",\"customerDto: name -> must be less than or equal to 100\"]"));
+                .andExpect(content().string("[\"customerDto: name -> must not be blank\",\"customerDto: name -> size must be between 3 and 100\"]"));
     }
 
 }
