@@ -7,11 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.ConstraintViolationException;
 import java.net.URI;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/customer")
@@ -49,12 +46,4 @@ public class CustomerRestController {
         customerService.delete(customerId);
     }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity validationHandler(ConstraintViolationException exception) {
-        List<String> errorList = exception.getConstraintViolations()
-                .stream()
-                .map(e -> e.getPropertyPath() + ":" + e.getMessage())
-                .collect(Collectors.toList());
-        return new ResponseEntity(errorList, HttpStatus.BAD_REQUEST);
-    }
 }

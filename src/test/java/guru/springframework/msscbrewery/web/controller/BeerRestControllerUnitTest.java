@@ -85,7 +85,6 @@ public class BeerRestControllerUnitTest {
     @Test
     public void handleCreateInvalidBeer() throws Exception {
         BeerDto beerDto = validBeer;
-        beerDto.setId(null);
         beerDto.setBeerName("");
         BeerDto savedDto = BeerDto.builder().id(UUID.randomUUID()).beerName("New Beer").build();
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
@@ -95,7 +94,8 @@ public class BeerRestControllerUnitTest {
         mockMvc.perform(post("/api/v1/beer/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(beerDtoJson))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("[\"beerDto: id -> must be null\",\"beerDto: beerName -> must not be blank\"]"));
     }
 
 }
