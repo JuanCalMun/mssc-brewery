@@ -1,8 +1,9 @@
 package guru.springframework.msscbrewery.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import guru.springframework.msscbrewery.services.beer.BeerService;
 import guru.springframework.msscbrewery.web.model.BeerDto;
-import guru.springframework.msscbrewery.web.service.beer.BeerService;
+import guru.springframework.msscbrewery.web.model.BeerStyleEnum;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +42,7 @@ public class BeerRestControllerUnitTest {
         validBeer = BeerDto.builder()
                 .id(UUID.randomUUID())
                 .beerName("Beer1")
-                .beerType("PALE ALE")
+                .beerStyle(BeerStyleEnum.PALE_ALE)
                 .upc(123123123L)
                 .build();
     }

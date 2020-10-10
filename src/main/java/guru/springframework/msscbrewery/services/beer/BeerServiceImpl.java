@@ -1,6 +1,7 @@
-package guru.springframework.msscbrewery.web.service.beer;
+package guru.springframework.msscbrewery.services.beer;
 
 import guru.springframework.msscbrewery.web.model.BeerDto;
+import guru.springframework.msscbrewery.web.model.BeerStyleEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class BeerServiceImpl implements BeerService {
         return BeerDto.builder()
                 .id(UUID.randomUUID())
                 .beerName("Galaxy Cat")
-                .beerType("Pale Ale")
+                .beerStyle(BeerStyleEnum.PALE_ALE)
                 .build();
     }
 
@@ -33,7 +34,7 @@ public class BeerServiceImpl implements BeerService {
         return BeerDto.builder()
                 .id(beerId)
                 .beerName(beerNewValues.getBeerName())
-                .beerType(beerNewValues.getBeerType())
+                .beerStyle(beerNewValues.getBeerStyle())
                 .upc(beerNewValues.getUpc())
                 .build();
     }
