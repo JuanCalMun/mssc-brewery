@@ -3,17 +3,27 @@ package guru.springframework.msscbrewery.web.mappers.shared;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 @Component
 public final class DateMapper {
 
-    public Timestamp offsetDateTimeToTimestamp(OffsetDateTime offsetDateTime) {
-        return Timestamp.valueOf(LocalDateTime.ofInstant(offsetDateTime.toInstant(), offsetDateTime.getOffset()));
+    public OffsetDateTime asOffsetDateTime(Timestamp timestamp) {
+        if (timestamp != null) {
+            return OffsetDateTime.of(timestamp.toLocalDateTime().getYear(), timestamp.toLocalDateTime().getMonthValue(),
+                    timestamp.toLocalDateTime().getDayOfMonth(), timestamp.toLocalDateTime().getHour(), timestamp.toLocalDateTime().getMinute(),
+                    timestamp.toLocalDateTime().getSecond(), timestamp.toLocalDateTime().getNano(), ZoneOffset.UTC);
+        } else {
+            return null;
+        }
     }
 
-    public OffsetDateTime timestampToOffsetDateTime(Timestamp timestamp) {
-        return OffsetDateTime.ofInstant(timestamp.toInstant(), OffsetDateTime.now().getOffset());
+    public Timestamp asTimestamp(OffsetDateTime offsetDateTime) {
+        if (offsetDateTime != null) {
+            return Timestamp.valueOf(offsetDateTime.atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+        } else {
+            return null;
+        }
     }
 }
